@@ -34,11 +34,12 @@ const cards = [
     color: "#4ECDC4",
     back: "She is guarded at first. Then one day she is just — herself. That version is someone worth knowing.",
   },
+  // ── This last card is yours. Replace the back with something real you remember. ──
   {
     id: 6,
-    front: "Three Years Ahead",
-    color: "#FF5A5F",
-    back: "She got here three years before most. She knows things. She has been patient about it. That is not nothing.",
+    front: "One Real Thing",
+    color: "#1F1F1F",
+    back: "I do not say things easily. So I built a whole website instead. But this card is just me saying it directly: I am glad I got to know this version of you. Happy Birthday.",
   },
 ];
 
@@ -91,8 +92,12 @@ export default function MemoriesPage() {
                   style={{ backgroundColor: card.color, backfaceVisibility: "hidden" }}
                 >
                   <p
-                    className="text-[#1F1F1F] text-lg text-center"
-                    style={{ fontFamily: "var(--font-fredoka)", fontWeight: 500 }}
+                    className="text-lg text-center"
+                    style={{
+                      fontFamily: "var(--font-fredoka)",
+                      fontWeight: 500,
+                      color: card.color === "#1F1F1F" ? "#FFE66D" : "#1F1F1F",
+                    }}
                   >
                     {card.front}
                   </p>

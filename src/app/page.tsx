@@ -4,6 +4,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
 
+// ── Update these to her actual birthday ──
+const BIRTHDAY_MONTH = 5; // May
+const BIRTHDAY_DAY   = 12;
+
+function getBirthdaySubtitle() {
+  const now = new Date();
+  const isToday =
+    now.getMonth() + 1 === BIRTHDAY_MONTH && now.getDate() === BIRTHDAY_DAY;
+  return isToday
+    ? "Today is the day."
+    : "This was made on the day.";
+}
+
 const taps = [
   "Hehe… you tapped me 😏",
   "Again? Bold.",
@@ -17,6 +30,7 @@ export default function HomePage() {
   const [count, setCount] = useState(0);
   const [bubble, setBubble] = useState<string | null>(null);
   const [shakeKey, setShakeKey] = useState(0);
+  const subtitle = getBirthdaySubtitle();
 
   function handleTap() {
     const next = count + 1;
@@ -88,7 +102,8 @@ export default function HomePage() {
         transition={{ delay: 0.4 }}
         className="text-lg text-[#9CA3AF] mb-10 max-w-sm"
       >
-        Made for someone who deserves more than a group chat message.
+        Made for someone who deserves more than a group chat message.{" "}
+        <span className="text-[#FF5A5F] font-semibold">{subtitle}</span>
       </motion.p>
 
       <motion.div

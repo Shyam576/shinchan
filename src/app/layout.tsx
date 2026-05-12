@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fredoka, Nunito } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import KeyboardEgg from "@/components/KeyboardEgg";
 
 const fredoka = Fredoka({
   variable: "--font-fredoka",
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[#FFF8E7] text-[#1F1F1F]">
         <Nav />
         <main className="flex-1">{children}</main>
+        <KeyboardEgg />
       </body>
     </html>
   );

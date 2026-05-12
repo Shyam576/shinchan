@@ -1,9 +1,28 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
 
+const reactions = [
+  "I knew you would. Classic.",
+  "Still doing it?",
+  "…okay this is kind of impressive.",
+  "Fine. You win. Happy Birthday. 🎂",
+];
+
 export default function IntroPage() {
+  const [presses, setPresses] = useState(0);
+  const [show, setShow] = useState(false);
+
+  function press() {
+    setPresses((p) => p + 1);
+    setShow(true);
+    setTimeout(() => setShow(false), 2000);
+  }
+
+  const reaction = reactions[Math.min(presses - 1, reactions.length - 1)] ?? "";
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-16">
       <div className="max-w-xl w-full">
@@ -56,7 +75,34 @@ export default function IntroPage() {
             </p>
           </div>
 
-          <div className="mt-8 flex gap-3 flex-wrap">
+          {/* Do NOT press easter egg */}
+          <div className="mt-6 flex items-center gap-3 flex-wrap">
+            <div className="relative">
+              <motion.button
+                onClick={press}
+                whileTap={{ scale: 0.93, rotate: -2 }}
+                className="border-2 border-dashed border-[#9CA3AF] rounded-full px-4 py-1.5 text-xs text-[#9CA3AF] font-semibold hover:border-[#FF5A5F] hover:text-[#FF5A5F] transition-all select-none"
+              >
+                Do NOT press this
+              </motion.button>
+              <AnimatePresence>
+                {show && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 4, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.18 }}
+                    className="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#1F1F1F] text-white rounded-xl px-3 py-1.5 text-xs font-semibold whitespace-nowrap z-10"
+                  >
+                    {reaction}
+                    <span className="absolute -bottom-[8px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[8px] border-l-transparent border-r-transparent border-t-[#1F1F1F]" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          <div className="mt-6 flex gap-3 flex-wrap">
             <Link
               href="/bug-hunt"
               className="bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"

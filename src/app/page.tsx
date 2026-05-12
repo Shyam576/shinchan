@@ -1,23 +1,75 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
 
+const taps = [
+  "Hehe… you tapped me 😏",
+  "Again? Bold.",
+  "Okay fine, I like the attention.",
+  "You have a problem.",
+  "…okay same.",
+  "Go inside already. The birthday is in there 👆",
+];
+
 export default function HomePage() {
+  const [count, setCount] = useState(0);
+  const [bubble, setBubble] = useState<string | null>(null);
+  const [shakeKey, setShakeKey] = useState(0);
+
+  function handleTap() {
+    const next = count + 1;
+    setCount(next);
+    setBubble(taps[Math.min(next - 1, taps.length - 1)]);
+    setShakeKey((k) => k + 1);
+    setTimeout(() => setBubble(null), 2200);
+  }
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-16 text-center">
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="flex justify-center mb-8"
+        className="relative flex justify-center mb-8"
       >
-        <motion.div
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        {/* Speech bubble */}
+        <AnimatePresence>
+          {bubble && (
+            <motion.div
+              key={bubble}
+              initial={{ opacity: 0, y: 6, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -4, scale: 0.95 }}
+              transition={{ duration: 0.22 }}
+              className="absolute -top-14 left-1/2 -translate-x-1/2 bg-white border-2 border-[#1F1F1F] rounded-2xl px-4 py-2 text-sm font-semibold whitespace-nowrap shadow-[3px_3px_0px_#1F1F1F] z-10"
+            >
+              {bubble}
+              {/* tail */}
+              <span className="absolute -bottom-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[10px] border-l-transparent border-r-transparent border-t-[#1F1F1F]" />
+              <span className="absolute -bottom-[7px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[8px] border-l-transparent border-r-transparent border-t-white" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.button
+          key={shakeKey}
+          onClick={handleTap}
+          animate={shakeKey > 0 ? { rotate: [-4, 4, -3, 3, 0], scale: [1, 1.08, 1] } : {}}
+          transition={{ duration: 0.35 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.93 }}
+          className="cursor-pointer focus:outline-none select-none"
+          aria-label="Tap Bugchan"
         >
-          <Bugchan size={140} />
-        </motion.div>
+          <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Bugchan size={140} />
+          </motion.div>
+        </motion.button>
       </motion.div>
 
       <motion.h1

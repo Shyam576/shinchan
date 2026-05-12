@@ -108,6 +108,44 @@ export default function RoastModePage() {
             </Link>
           </motion.div>
         )}
+
+        {/* Things she has definitely said */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-14"
+        >
+          <p className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-widest mb-4">
+            Things she has definitely said
+          </p>
+          <div className="flex flex-col gap-3">
+            {[
+              { text: "Did you even test this?", align: "left" },
+              { text: "This is not a bug, this is a feature. I refuse.", align: "right" },
+              { text: "I will just check one more thing…", align: "left" },
+              { text: "Someone broke prod. I am not saying who. But someone.", align: "right" },
+            ].map((q, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: q.align === "left" ? -20 : 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 + i * 0.12 }}
+                className={`flex ${q.align === "right" ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`max-w-[82%] px-4 py-3 rounded-2xl border-2 border-[#1F1F1F] text-sm font-medium shadow-[3px_3px_0px_#1F1F1F] ${
+                    q.align === "right"
+                      ? "bg-[#FFE66D] rounded-br-sm"
+                      : "bg-white rounded-bl-sm"
+                  }`}
+                >
+                  {q.text}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </div>
   );

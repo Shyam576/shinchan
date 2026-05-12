@@ -1,17 +1,86 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
+import { useTypewriter } from "@/hooks/useTypewriter";
+
+const lines = [
+  "I made this because you remind me of that rare kind of person —",
+  "intelligent, funny, slightly chaotic,",
+  "and somehow still childlike in the best way.",
+  "",
+  "You make things feel lighter once you are comfortable around someone.",
+  "That is not a small thing.",
+  "",
+  "Complaint reviewed.",
+  "Verdict: she is annoying, but in a way people secretly miss.",
+  "",
+  "So today — no bugs, no test cases, no tickets.",
+  "Just a small birthday world, made for you.",
+  "",
+  "Have a good one. You have earned it. 🎂",
+];
+
+function TypewriterLines({ onDone }: { onDone: () => void }) {
+  const [lineIdx, setLineIdx] = useState(0);
+  const [shown, setShown] = useState<string[]>([]);
+  const { displayed, done } = useTypewriter(
+    lineIdx < lines.length ? lines[lineIdx] : "",
+    30
+  );
+
+  useEffect(() => {
+    if (!done) return;
+    const delay = lines[lineIdx] === "" ? 100 : 420;
+    const t = setTimeout(() => {
+      setShown((prev) => [...prev, lines[lineIdx]]);
+      if (lineIdx + 1 >= lines.length) {
+        onDone();
+      } else {
+        setLineIdx((i) => i + 1);
+      }
+    }, delay);
+    return () => clearTimeout(t);
+  }, [done, lineIdx, onDone]);
+
+  return (
+    <div className="space-y-1 text-[#1F1F1F] text-base leading-relaxed font-medium min-h-[220px]">
+      {shown.map((l, i) =>
+        l === "" ? (
+          <div key={i} className="h-3" />
+        ) : (
+          <p
+            key={i}
+            className={l.startsWith("Complaint") || l.startsWith("Verdict") ? "text-[#FF5A5F]" : ""}
+          >
+            {l}
+          </p>
+        )
+      )}
+      {lineIdx < lines.length && lines[lineIdx] !== "" && (
+        <p className={lines[lineIdx].startsWith("Complaint") || lines[lineIdx].startsWith("Verdict") ? "text-[#FF5A5F]" : ""}>
+          {displayed}
+          <motion.span
+            animate={{ opacity: [1, 0, 1] }}
+            transition={{ duration: 0.7, repeat: Infinity }}
+            className="inline-block w-[2px] h-[1em] bg-[#FF5A5F] ml-0.5 align-middle"
+          />
+        </p>
+      )}
+    </div>
+  );
+}
 
 export default function FinalPage() {
   const fired = useRef(false);
-  const [ready, setReady] = useState(false);
+  const [started, setStarted] = useState(false);
+  const [writingDone, setWritingDone] = useState(false);
 
   useEffect(() => {
     if (fired.current) return;
     fired.current = true;
-    const t = setTimeout(() => setReady(true), 400);
+    const t = setTimeout(() => setStarted(true), 600);
     return () => clearTimeout(t);
   }, []);
 
@@ -54,43 +123,23 @@ export default function FinalPage() {
             Happy Birthday.
           </h1>
 
-          {ready && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-4 text-[#1F1F1F] text-base leading-relaxed"
-            >
-              <p>
-                I made this because you remind me of that rare kind of person — intelligent,
-                funny, slightly chaotic, and somehow still childlike in the best way.
-              </p>
-              <p>
-                You make things feel lighter once you are comfortable around someone.
-                That is not a small thing. Most people never figure out how to do that.
-              </p>
-              <p className="text-[#FF5A5F] font-semibold">
-                Complaint reviewed. Verdict: she is annoying, but in a way people secretly miss.
-              </p>
-              <p>
-                So today — no bugs, no test cases, no tickets. Just a small birthday world
-                made for you.
-              </p>
-              <p className="font-semibold">
-                Have a good one. You have earned it. 🎂
-              </p>
-            </motion.div>
+          {started && (
+            <TypewriterLines onDone={() => setWritingDone(true)} />
           )}
 
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: ready ? 1 : 0 }}
-            transition={{ delay: 0.6 }}
-            onClick={fireConfetti}
-            className="mt-8 bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all w-full"
-          >
-            Deploy Birthday Wish 🚀
-          </motion.button>
+          <AnimatePresence>
+            {writingDone && (
+              <motion.button
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                onClick={fireConfetti}
+                className="mt-8 bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all w-full"
+              >
+                Deploy Birthday Wish 🚀
+              </motion.button>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         <motion.div

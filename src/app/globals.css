@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-shinYellow: #FFD93D;
+  --color-shinRed: #FF4D4D;
+  --color-shinBlue: #4D96FF;
+  --color-cream: #FFF4D6;
+  --color-ink: #1E1E1E;
+  --color-shinGreen: #6BCB77;
+  --color-shinPurple: #C77DFF;
+  --color-shinOrange: #FF9A3C;
+  --border-radius-cartoon: 24px;
+  --shadow-cartoon: 6px 6px 0px #1E1E1E;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #FFF4D6;
+  --foreground: #1E1E1E;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Cartoon doodle border animation */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+@keyframes bounce-in {
+  0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+  60% { transform: scale(1.15) rotate(4deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.wiggle { animation: wiggle 0.5s ease-in-out infinite; }
+.float { animation: float 3s ease-in-out infinite; }
+.bounce-in { animation: bounce-in 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97); }

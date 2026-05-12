@@ -17,9 +17,13 @@
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  /* warm dot grid */
+  background-image: radial-gradient(circle, #d8ccae 1px, transparent 1px);
+  background-size: 24px 24px;
   color: var(--foreground);
   font-family: var(--font-nunito), ui-sans-serif, sans-serif;
+  scroll-behavior: smooth;
 }
 
 h1, h2, h3, h4 {

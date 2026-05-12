@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
@@ -31,13 +31,15 @@ export default function HomePage() {
   const [bubble, setBubble] = useState<string | null>(null);
   const [shakeKey, setShakeKey] = useState(0);
   const subtitle = getBirthdaySubtitle();
+  const bubbleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function handleTap() {
     const next = count + 1;
     setCount(next);
     setBubble(taps[Math.min(next - 1, taps.length - 1)]);
     setShakeKey((k) => k + 1);
-    setTimeout(() => setBubble(null), 2200);
+    if (bubbleTimer.current) clearTimeout(bubbleTimer.current);
+    bubbleTimer.current = setTimeout(() => setBubble(null), 2200);
   }
 
   return (

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
@@ -73,16 +73,15 @@ function TypewriterLines({ onDone }: { onDone: () => void }) {
 }
 
 export default function FinalPage() {
-  const fired = useRef(false);
   const [started, setStarted] = useState(false);
   const [writingDone, setWritingDone] = useState(false);
 
   useEffect(() => {
-    if (fired.current) return;
-    fired.current = true;
     const t = setTimeout(() => setStarted(true), 600);
     return () => clearTimeout(t);
   }, []);
+
+  const handleDone = useCallback(() => setWritingDone(true), []);
 
   function fireConfetti() {
     import("canvas-confetti").then(({ default: confetti }) => {
@@ -124,7 +123,7 @@ export default function FinalPage() {
           </h1>
 
           {started && (
-            <TypewriterLines onDone={() => setWritingDone(true)} />
+            <TypewriterLines onDone={handleDone} />
           )}
 
           <AnimatePresence>

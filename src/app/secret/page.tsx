@@ -56,10 +56,10 @@ export default function SecretPage() {
           className="mt-6 text-center"
         >
           <Link
-            href="/final"
+            href="/"
             className="text-sm text-[#9CA3AF] hover:text-[#1F1F1F] transition-colors font-medium"
           >
-            ← Back to the birthday
+            ← Back to home
           </Link>
         </motion.div>
       </div>

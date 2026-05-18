@@ -5,8 +5,8 @@ import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
 
 // ── Update these to her actual birthday ──
-const BIRTHDAY_MONTH = 5; // May
-const BIRTHDAY_DAY   = 12;
+const BIRTHDAY_MONTH = 7; // July
+const BIRTHDAY_DAY   = 15;
 
 function getBirthdaySubtitle() {
   const now = new Date();
@@ -14,7 +14,7 @@ function getBirthdaySubtitle() {
     now.getMonth() + 1 === BIRTHDAY_MONTH && now.getDate() === BIRTHDAY_DAY;
   return isToday
     ? "Today is the day."
-    : "This was made on the day.";
+    : "Built on her birthday, July 15.";
 }
 
 const taps = [
@@ -92,11 +92,22 @@ export default function HomePage() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
-        className="text-5xl md:text-6xl text-[#1F1F1F] mb-4 leading-tight"
+        className="text-5xl md:text-6xl text-[#1F1F1F] mb-3 leading-tight"
         style={{ fontFamily: "var(--font-fredoka)", fontWeight: 500 }}
       >
         A tiny birthday world.
       </motion.h1>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        className="mb-4"
+      >
+        <span className="inline-block bg-[#1F1F1F] text-[#FFE66D] rounded-full px-3 py-0.5 text-xs font-mono font-semibold tracking-wide">
+          Birthday Release v1.0.0
+        </span>
+      </motion.div>
 
       <motion.p
         initial={{ opacity: 0 }}
@@ -119,6 +130,23 @@ export default function HomePage() {
         >
           Enter →
         </Link>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.4 }}
+        className="mt-16 group relative inline-flex justify-center"
+      >
+        <span
+          className="text-2xl opacity-[0.18] group-hover:opacity-50 transition-opacity duration-300 cursor-default select-none"
+          aria-hidden="true"
+        >
+          🎮
+        </span>
+        <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-[#1F1F1F] text-white text-xs font-mono rounded-lg px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none shadow-md">
+          ↑↑↓↓←→←→BA
+        </div>
       </motion.div>
     </div>
   );

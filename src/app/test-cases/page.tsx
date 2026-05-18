@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import BugchanSay from "@/components/BugchanSay";
 
 const truths = [
   "She is annoying, but only in the way people secretly miss.",
@@ -25,21 +26,34 @@ export default function TestCasesPage() {
 
   const allChecked = checked.size === truths.length;
 
+  useEffect(() => {
+    if (!allChecked) return;
+    import("canvas-confetti").then(({ default: confetti }) => {
+      confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 }, colors: ["#4ECDC4", "#FFE66D", "#FF5A5F"] });
+    });
+  }, [allChecked]);
+
   return (
     <div className="min-h-screen px-5 py-12">
       <div className="max-w-xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10"
+          className="mb-10 flex items-start gap-5"
         >
-          <h1
-            className="text-4xl text-[#1F1F1F] mb-2"
-            style={{ fontFamily: "var(--font-fredoka)", fontWeight: 500 }}
-          >
-            True Things
-          </h1>
-          <p className="text-[#9CA3AF]">Verified. No test cases needed.</p>
+          <div className="flex-1">
+            <div className="inline-block bg-[#1F1F1F] text-[#FFE66D] rounded-full px-3 py-0.5 text-xs font-mono font-semibold mb-2 tracking-wide">
+              TEST SUITE v1.0
+            </div>
+            <h1
+              className="text-4xl text-[#1F1F1F] mb-2"
+              style={{ fontFamily: "var(--font-fredoka)", fontWeight: 500 }}
+            >
+              Passed Test Cases
+            </h1>
+            <p className="text-[#9CA3AF]">All assertions verified. No edge cases remain.</p>
+          </div>
+          <BugchanSay text="All checks must pass before deployment." size={72} />
         </motion.div>
 
         <div className="space-y-4">
@@ -87,7 +101,7 @@ export default function TestCasesPage() {
               href="/roast-mode"
               className="inline-block bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
             >
-              Field Notes →
+              Feature Log →
             </Link>
           </motion.div>
         )}

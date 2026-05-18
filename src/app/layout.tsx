@@ -18,6 +18,9 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   title: "Happy Birthday 🎂",
   description: "A tiny birthday world, made for you.",
+  other: {
+    "x-secret": "↑↑↓↓←→←→BA 🎮",
+  },
 };
 
 export default function RootLayout({

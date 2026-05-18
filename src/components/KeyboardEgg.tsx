@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 import Bugchan from "@/components/Bugchan";
 
 const lines = [
@@ -10,16 +11,47 @@ const lines = [
   "All systems: birthday. 🎂",
 ];
 
+const KONAMI = [
+  "ArrowUp","ArrowUp","ArrowDown","ArrowDown",
+  "ArrowLeft","ArrowRight","ArrowLeft","ArrowRight",
+  "b","a",
+];
+
 export default function KeyboardEgg() {
   const [visible, setVisible] = useState(false);
   const [line, setLine] = useState(lines[0]);
   const qTime = useRef(0);
   const dismissTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const konamiIdx = useRef(0);
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(
+      "%c🐞 You opened DevTools. Of course you did.",
+      "color:#FF5A5F;font-size:14px;font-weight:bold;"
+    );
+    console.log(
+      "%cPsst — there's a cheat code somewhere on this page 🎮",
+      "color:#9CA3AF;font-size:12px;"
+    );
+  }, []);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       const tag = (e.target as HTMLElement)?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA") return;
+
+      // Konami code
+      if (e.key === KONAMI[konamiIdx.current]) {
+        konamiIdx.current += 1;
+        if (konamiIdx.current === KONAMI.length) {
+          konamiIdx.current = 0;
+          router.push("/secret?via=konami");
+          return;
+        }
+      } else {
+        konamiIdx.current = e.key === KONAMI[0] ? 1 : 0;
+      }
 
       if (e.key === "q" || e.key === "Q") {
         qTime.current = Date.now();
@@ -39,7 +71,7 @@ export default function KeyboardEgg() {
       window.removeEventListener("keydown", onKey);
       if (dismissTimer.current) clearTimeout(dismissTimer.current);
     };
-  }, []);
+  }, [router]);
 
   return (
     <AnimatePresence>

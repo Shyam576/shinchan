@@ -83,6 +83,15 @@ export default function FinalPage() {
 
   const handleDone = useCallback(() => setWritingDone(true), []);
 
+  useEffect(() => {
+    if (!writingDone) return;
+    import("canvas-confetti").then(({ default: confetti }) => {
+      confetti({ particleCount: 120, spread: 90, origin: { y: 0.55 }, colors: ["#FFE66D", "#FF5A5F", "#4ECDC4", "#1F1F1F"] });
+      setTimeout(() => confetti({ particleCount: 80, spread: 120, origin: { y: 0.5, x: 0.2 }, colors: ["#FFE66D", "#FF5A5F"] }), 400);
+      setTimeout(() => confetti({ particleCount: 80, spread: 120, origin: { y: 0.5, x: 0.8 }, colors: ["#4ECDC4", "#1F1F1F"] }), 700);
+    });
+  }, [writingDone]);
+
   function fireConfetti() {
     import("canvas-confetti").then(({ default: confetti }) => {
       confetti({
@@ -112,7 +121,7 @@ export default function FinalPage() {
           </motion.div>
 
           <div className="inline-block bg-[#FFE66D] border-2 border-[#1F1F1F] rounded-full px-3 py-0.5 text-xs font-semibold mb-5 uppercase tracking-wide">
-            Final Message
+            Production Release
           </div>
 
           <h1
@@ -128,12 +137,44 @@ export default function FinalPage() {
 
           <AnimatePresence>
             {writingDone && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="mt-8 border-2 border-[#1F1F1F] rounded-2xl overflow-hidden"
+              >
+                <div className="bg-[#1F1F1F] px-5 py-2.5">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#FFE66D] font-mono">
+                    Final QA Report — v1.0.0
+                  </span>
+                </div>
+                <div className="px-5 py-4 space-y-2 bg-white">
+                  {([
+                    ["Test Subject",       "Birthday Girl"],
+                    ["Build Version",      "+1 year"],
+                    ["Bugs Found",         "Many (filed, closed)"],
+                    ["Charm Level",        "CRITICAL"],
+                    ["Fix Recommendation", "DO NOT FIX"],
+                    ["Release Status",     "✅ APPROVED"],
+                  ] as [string, string][]).map(([key, val]) => (
+                    <div key={key} className="flex justify-between items-center gap-4">
+                      <span className="text-[#9CA3AF] font-mono text-xs">{key}</span>
+                      <span className="text-[#1F1F1F] font-semibold text-sm text-right">{val}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {writingDone && (
               <motion.button
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
                 onClick={fireConfetti}
-                className="mt-8 bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all w-full"
+                className="mt-4 bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all w-full"
               >
                 Deploy Birthday Wish 🚀
               </motion.button>

@@ -4,12 +4,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
 
 const links = [
-  { href: "/intro",      label: "Intro"         },
-  { href: "/bug-hunt",   label: "Little Things" },
-  { href: "/test-cases", label: "True Things"   },
-  { href: "/roast-mode", label: "Field Notes"   },
-  { href: "/memories",   label: "Memories"      },
-  { href: "/final",      label: "The End"       },
+  { href: "/intro",        label: "QA Case"      },
+  { href: "/bug-hunt",     label: "Observed"     },
+  { href: "/test-cases",   label: "Test Cases"   },
+  { href: "/roast-mode",   label: "Feature Log"  },
+  { href: "/memories",     label: "Evidence"     },
+  { href: "/appreciation", label: "Appreciation" },
+  { href: "/final",        label: "Release"      },
 ];
 
 export default function Nav() {
@@ -35,12 +36,13 @@ export default function Nav() {
       <div className="max-w-5xl mx-auto px-5 py-3 flex items-center gap-2 flex-wrap">
         <button
           onClick={handleLogTap}
-          className="text-[#FF5A5F] text-lg font-semibold mr-3 shrink-0 hover:opacity-70 transition-opacity cursor-pointer select-none focus:outline-none"
+          className="text-[#FF5A5F] text-lg font-semibold shrink-0 hover:opacity-70 transition-opacity cursor-pointer select-none focus:outline-none"
           style={{ fontFamily: "var(--font-fredoka)" }}
           aria-label="Home"
         >
           🐞
         </button>
+        <span className="text-[10px] text-[#9CA3AF] font-mono mr-3 shrink-0 select-none">v1.0.0</span>
 
         {/* Step dots */}
         {step >= 0 && (

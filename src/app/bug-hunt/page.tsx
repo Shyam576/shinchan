@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import BugchanSay from "@/components/BugchanSay";
 
 const things = [
   { id: 1, emoji: "👀", reveal: "She notices things other people miss. In code, in conversations, in the room." },
@@ -34,22 +35,28 @@ export default function BugHuntPage() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10"
+          className="mb-10 flex items-start gap-5"
         >
-          <h1
-            className="text-4xl text-[#1F1F1F] mb-2"
-            style={{ fontFamily: "var(--font-fredoka)", fontWeight: 500 }}
-          >
-            Little Things
-          </h1>
-          <p className="text-[#9CA3AF]">
-            Some things I noticed.{" "}
-            {count > 0 && (
-              <span className="text-[#FF5A5F] font-medium">
-                {count} / {things.length} revealed.
-              </span>
-            )}
-          </p>
+          <div className="flex-1">
+            <div className="inline-block bg-[#1F1F1F] text-[#FFE66D] rounded-full px-3 py-0.5 text-xs font-mono font-semibold mb-2 tracking-wide">
+              OBSERVATION LOG
+            </div>
+            <h1
+              className="text-4xl text-[#1F1F1F] mb-2"
+              style={{ fontFamily: "var(--font-fredoka)", fontWeight: 500 }}
+            >
+              Observed Behaviors
+            </h1>
+            <p className="text-[#9CA3AF]">
+              Behavioral patterns detected in the wild.{" "}
+              {count > 0 && (
+                <span className="text-[#FF5A5F] font-medium">
+                  {count} / {things.length} revealed.
+                </span>
+              )}
+            </p>
+          </div>
+          <BugchanSay text="Logging observations. Do not panic." size={72} />
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -105,7 +112,7 @@ export default function BugHuntPage() {
               href="/test-cases"
               className="inline-block bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
             >
-              True Things →
+              Test Cases →
             </Link>
           </motion.div>
         )}

@@ -32,12 +32,19 @@ export default function IntroPage() {
           transition={{ type: "spring", stiffness: 160 }}
           className="flex justify-center mb-8"
         >
-          <motion.div
-            animate={{ rotate: [-2, 2, -2] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Bugchan size={130} />
-          </motion.div>
+          <div className="relative inline-flex flex-col items-center">
+            <div className="relative mb-2 bg-white border-2 border-[#1F1F1F] rounded-2xl px-4 py-2 text-sm font-semibold text-[#1F1F1F] shadow-[2px_2px_0px_#1F1F1F] whitespace-nowrap">
+              User appears older. Behavior says otherwise.
+              <span className="absolute -bottom-[9px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[7px] border-r-[7px] border-t-[9px] border-l-transparent border-r-transparent border-t-[#1F1F1F]" />
+              <span className="absolute -bottom-[6px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[5px] border-r-[5px] border-t-[7px] border-l-transparent border-r-transparent border-t-white" />
+            </div>
+            <motion.div
+              animate={{ rotate: [-2, 2, -2] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Bugchan size={130} />
+            </motion.div>
+          </div>
         </motion.div>
 
         <motion.div
@@ -47,7 +54,7 @@ export default function IntroPage() {
           className="bg-white border-2 border-[#1F1F1F] rounded-2xl p-8 shadow-[6px_6px_0px_#1F1F1F]"
         >
           <div className="inline-block bg-[#FFE66D] border-2 border-[#1F1F1F] rounded-full px-3 py-0.5 text-xs font-semibold mb-5 tracking-wide uppercase">
-            System initializing…
+            QA Case #001 — Special Subject
           </div>
 
           <h1
@@ -107,13 +114,13 @@ export default function IntroPage() {
               href="/bug-hunt"
               className="bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
             >
-              Little Things →
+              Observed Behaviors →
             </Link>
             <Link
               href="/final"
               className="border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold hover:bg-[#FFE66D] transition-all"
             >
-              Skip to end
+              Skip to Release
             </Link>
           </div>
         </motion.div>

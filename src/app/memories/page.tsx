@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import BugchanSay from "@/components/BugchanSay";
 
 const cards = [
   {
@@ -60,15 +61,21 @@ export default function MemoriesPage() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10"
+          className="mb-10 flex items-start gap-5"
         >
-          <h1
-            className="text-4xl text-[#1F1F1F] mb-2"
-            style={{ fontFamily: "var(--font-fredoka)", fontWeight: 500 }}
-          >
-            A Few Moments
-          </h1>
-          <p className="text-[#9CA3AF]">Tap each card.</p>
+          <div className="flex-1">
+            <div className="inline-block bg-[#1F1F1F] text-[#FFE66D] rounded-full px-3 py-0.5 text-xs font-mono font-semibold mb-2 tracking-wide">
+              EVIDENCE ROOM
+            </div>
+            <h1
+              className="text-4xl text-[#1F1F1F] mb-2"
+              style={{ fontFamily: "var(--font-fredoka)", fontWeight: 500 }}
+            >
+              Evidence Logs
+            </h1>
+            <p className="text-[#9CA3AF]">Exhibits A through F. Tap each to open.</p>
+          </div>
+          <BugchanSay text="Evidence collected. Case is strong." size={72} />
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
@@ -88,11 +95,17 @@ export default function MemoriesPage() {
                 style={{ transformStyle: "preserve-3d", position: "relative", height: 200 }}
               >
                 <div
-                  className="absolute inset-0 border-2 border-[#1F1F1F] rounded-2xl flex items-center justify-center p-6 shadow-[4px_4px_0px_#1F1F1F] select-none"
+                  className="absolute inset-0 border-2 border-[#1F1F1F] rounded-2xl flex flex-col items-start justify-between p-5 shadow-[4px_4px_0px_#1F1F1F] select-none"
                   style={{ backgroundColor: card.color, backfaceVisibility: "hidden" }}
                 >
+                  <span
+                    className="text-[10px] font-mono font-bold opacity-60"
+                    style={{ color: card.color === "#1F1F1F" ? "#FFE66D" : "#1F1F1F" }}
+                  >
+                    {card.logId}
+                  </span>
                   <p
-                    className="text-lg text-center"
+                    className="text-lg"
                     style={{
                       fontFamily: "var(--font-fredoka)",
                       fontWeight: 500,
@@ -101,14 +114,25 @@ export default function MemoriesPage() {
                   >
                     {card.front}
                   </p>
+                  <span
+                    className="text-[10px] font-semibold opacity-40"
+                    style={{ color: card.color === "#1F1F1F" ? "#FFE66D" : "#1F1F1F" }}
+                  >
+                    tap to open →
+                  </span>
                 </div>
                 <div
-                  className="absolute inset-0 bg-white border-2 border-[#1F1F1F] rounded-2xl flex items-center justify-center p-6 shadow-[4px_4px_0px_#1F1F1F] select-none"
+                  className="absolute inset-0 bg-white border-2 border-[#1F1F1F] rounded-2xl overflow-hidden shadow-[4px_4px_0px_#1F1F1F] select-none"
                   style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
                 >
-                  <p className="text-[#1F1F1F] text-sm font-medium leading-relaxed text-center">
-                    {card.back}
-                  </p>
+                  <div className="bg-[#1F1F1F] px-4 py-1.5">
+                    <span className="text-[10px] font-mono font-bold text-[#FFE66D] tracking-widest">EVIDENCE LOG</span>
+                  </div>
+                  <div className="flex items-center justify-center p-5 h-[calc(100%-28px)]">
+                    <p className="text-[#1F1F1F] text-sm font-medium leading-relaxed text-center">
+                      {card.back}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
@@ -123,10 +147,10 @@ export default function MemoriesPage() {
             className="mt-10 text-center"
           >
             <Link
-              href="/final"
+              href="/appreciation"
               className="inline-block bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
             >
-              The End →
+              Appreciation →
             </Link>
           </motion.div>
         )}

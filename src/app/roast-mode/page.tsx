@@ -8,7 +8,7 @@ const bugs = [
   {
     id: "QA-001",
     severity: "Low",
-    sevColor: "#4ECDC4",
+    sevColor: "#36B37E",
     title: "Typo Detection Overdrive",
     status: "WONTFIX",
     note: "She will find a typo in your birthday message. And she will tell you. That is love.",
@@ -16,7 +16,7 @@ const bugs = [
   {
     id: "QA-002",
     severity: "Medium",
-    sevColor: "#FFE66D",
+    sevColor: "#FFAB00",
     title: "Off-Hours Production Check",
     status: "BY DESIGN",
     note: "She asked for the day off. She spent half of it checking if someone broke production.",
@@ -24,7 +24,7 @@ const bugs = [
   {
     id: "QA-003",
     severity: "Low",
-    sevColor: "#4ECDC4",
+    sevColor: "#36B37E",
     title: "Compliment Gate Threshold Too High",
     status: "WONTFIX",
     note: "She will not say 'good job' easily. Which is exactly why, when she does — keep it forever.",
@@ -32,7 +32,7 @@ const bugs = [
   {
     id: "QA-004",
     severity: "Low",
-    sevColor: "#4ECDC4",
+    sevColor: "#36B37E",
     title: "Age vs Energy Mismatch",
     status: "WONTFIX",
     note: "She is three years older. Somehow still the most chaotic energy in any room.",
@@ -40,7 +40,7 @@ const bugs = [
   {
     id: "QA-005",
     severity: "Critical",
-    sevColor: "#FF5A5F",
+    sevColor: "#FF5630",
     title: "Pre-Emptive Bug Detection",
     status: "WORKING AS INTENDED",
     note: "Every meeting she joins: one bug caught before anyone else noticed. Every time.",
@@ -48,7 +48,7 @@ const bugs = [
   {
     id: "QA-006",
     severity: "Medium",
-    sevColor: "#FFE66D",
+    sevColor: "#FFAB00",
     title: "Sentimental Memory Buffer",
     status: "WONTFIX",
     note: "She acts like she is not sentimental. She remembers everything.",
@@ -56,7 +56,7 @@ const bugs = [
   {
     id: "QA-007",
     severity: "Low",
-    sevColor: "#4ECDC4",
+    sevColor: "#36B37E",
     title: "Birthday Ideal-State Definition",
     status: "CLOSED",
     note: "Her idea of a good birthday: zero Slack pings, clean logs, and someone else doing regression.",
@@ -64,7 +64,7 @@ const bugs = [
   {
     id: "QA-008",
     severity: "Critical",
-    sevColor: "#FF5A5F",
+    sevColor: "#FF5630",
     title: "Unreported Site Bug (This One)",
     status: "PENDING",
     note: "She found a bug in this website. She has not told anyone yet. She is waiting for the right moment.",
@@ -93,7 +93,7 @@ export default function RoastModePage() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10 flex items-start gap-5"
+          className="mb-10 flex flex-col sm:flex-row items-start gap-4"
         >
           <div className="flex-1">
             <div className="inline-block bg-[#1F1F1F] text-[#FFE66D] rounded-full px-3 py-0.5 text-xs font-mono font-semibold mb-2 tracking-wide">
@@ -126,14 +126,14 @@ export default function RoastModePage() {
               {/* Ticket header */}
               <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b-2 border-[#1F1F1F]">
                 <span className="text-xs font-mono font-bold text-[#9CA3AF] tracking-widest">{bug.id}</span>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-1.5">
                   <span
                     className="text-xs font-semibold px-2 py-0.5 rounded-full border border-[#1F1F1F]"
                     style={{ backgroundColor: bug.sevColor }}
                   >
                     {bug.severity}
                   </span>
-                  <span className="text-xs font-semibold text-[#9CA3AF] border border-[#9CA3AF] rounded-full px-2 py-0.5">
+                  <span className="text-[10px] font-semibold text-[#9CA3AF] border border-[#9CA3AF] rounded-full px-2 py-0.5 whitespace-nowrap">
                     {bug.status}
                   </span>
                 </div>

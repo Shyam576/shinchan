@@ -61,7 +61,7 @@ export default function MemoriesPage() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10 flex items-start gap-5"
+          className="mb-10 flex flex-col sm:flex-row items-start gap-4"
         >
           <div className="flex-1">
             <div className="inline-block bg-[#1F1F1F] text-[#FFE66D] rounded-full px-3 py-0.5 text-xs font-mono font-semibold mb-2 tracking-wide">

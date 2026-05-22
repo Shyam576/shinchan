@@ -33,7 +33,8 @@ export default function Nav() {
 
   return (
     <nav className="bg-[#FFF8E7]/90 backdrop-blur-sm border-b-2 border-[#1F1F1F] sticky top-0 z-50">
-      <div className="max-w-5xl mx-auto px-5 py-3 flex items-center gap-2 flex-wrap">
+      <div className="max-w-5xl mx-auto px-4 py-2.5 flex items-center gap-2">
+        {/* Logo + version */}
         <button
           onClick={handleLogTap}
           className="text-[#FF5A5F] text-lg font-semibold shrink-0 hover:opacity-70 transition-opacity cursor-pointer select-none focus:outline-none"
@@ -42,11 +43,11 @@ export default function Nav() {
         >
           🐞
         </button>
-        <span className="text-[10px] text-[#9CA3AF] font-mono mr-3 shrink-0 select-none">v1.0.0</span>
+        <span className="text-[10px] text-[#9CA3AF] font-mono shrink-0 select-none">v1.0.0</span>
 
-        {/* Step dots */}
+        {/* Step dots — hidden on very small screens */}
         {step >= 0 && (
-          <div className="flex items-center gap-1 mr-3 shrink-0">
+          <div className="hidden sm:flex items-center gap-1 ml-1 shrink-0">
             {links.map((_, i) => (
               <div
                 key={i}
@@ -60,20 +61,23 @@ export default function Nav() {
           </div>
         )}
 
-        {links.map((l) => (
-          <Link
-            key={l.href}
-            href={l.href}
-            className={[
-              "px-3 py-1 rounded-full border-2 border-[#1F1F1F] text-sm font-semibold transition-all duration-200",
-              pathname === l.href
-                ? "bg-[#FFE66D] shadow-[2px_2px_0px_#1F1F1F]"
-                : "bg-transparent hover:bg-[#FFE66D] hover:shadow-[2px_2px_0px_#1F1F1F]",
-            ].join(" ")}
-          >
-            {l.label}
-          </Link>
-        ))}
+        {/* Scrollable nav links */}
+        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none ml-1 flex-1 min-w-0">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className={[
+                "px-2.5 py-1 rounded-full border-2 border-[#1F1F1F] text-xs font-semibold transition-all duration-200 whitespace-nowrap shrink-0",
+                pathname === l.href
+                  ? "bg-[#FFE66D] shadow-[2px_2px_0px_#1F1F1F]"
+                  : "bg-transparent hover:bg-[#FFE66D] hover:shadow-[2px_2px_0px_#1F1F1F]",
+              ].join(" ")}
+            >
+              {l.label}
+            </Link>
+          ))}
+        </div>
       </div>
     </nav>
   );

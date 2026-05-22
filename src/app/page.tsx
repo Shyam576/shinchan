@@ -77,7 +77,7 @@ export default function HomePage() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.93 }}
           className="cursor-pointer focus:outline-none select-none"
-          aria-label="Tap Bugchan"
+          aria-label="Tap the mascot"
         >
           <motion.div
             animate={{ y: [0, -8, 0] }}

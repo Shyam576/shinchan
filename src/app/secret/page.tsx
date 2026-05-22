@@ -7,8 +7,22 @@ import { useTypewriter } from "@/hooks/useTypewriter";
 const message =
   "Okay. You found it. That means you were curious enough to look, which is very you.\n\nI am not good at saying things directly. So I made a website instead.\n\nYou probably already know everything I would say. But I wanted you to have somewhere that says it anyway.\n\nYou are one of those people who makes a place better just by being in it. Not loudly. Just — the room is different when you are there.\n\nThat is rare. And I am glad I got to be in the same room.\n\nHappy Birthday. 🎂";
 
+const roadmap = [
+  { type: "Feature Request", label: "More of these moments" },
+  { type: "Epic", label: "Still being here next year" },
+  { type: "Enhancement", label: "Slightly less chaos. But not much." },
+  { type: "Bug", label: "The one where she accepts a compliment without deflecting" },
+];
+
+const typeColor: Record<string, string> = {
+  "Feature Request": "#4ECDC4",
+  "Epic": "#FF5A5F",
+  "Enhancement": "#FFAB00",
+  "Bug": "#FF5630",
+};
+
 export default function SecretPage() {
-  const { displayed } = useTypewriter(message, 28, 300);
+  const { displayed, done } = useTypewriter(message, 28, 300);
 
   const lines = displayed.split("\n");
 
@@ -19,7 +33,7 @@ export default function SecretPage() {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="bg-[#1F1F1F] text-white border-2 border-[#1F1F1F] rounded-2xl p-10 shadow-[8px_8px_0px_#FFE66D]"
+          className="bg-[#1F1F1F] text-white border-2 border-[#1F1F1F] rounded-2xl p-6 sm:p-10 shadow-[8px_8px_0px_#FFE66D]"
         >
           <motion.div
             animate={{ y: [0, -5, 0] }}
@@ -41,13 +55,46 @@ export default function SecretPage() {
                 <p key={i}>{line}</p>
               )
             )}
-            <motion.span
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ duration: 0.7, repeat: Infinity }}
-              className="inline-block w-[2px] h-[1em] bg-[#FFE66D] align-middle ml-0.5"
-            />
+            {!done && (
+              <motion.span
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 0.7, repeat: Infinity }}
+                className="inline-block w-[2px] h-[1em] bg-[#FFE66D] align-middle ml-0.5"
+              />
+            )}
           </div>
         </motion.div>
+
+        {done && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-6 bg-white border-2 border-[#1F1F1F] rounded-2xl overflow-hidden shadow-[4px_4px_0px_#FFE66D]"
+          >
+            <div className="bg-[#FFE66D] px-5 py-2.5 border-b-2 border-[#1F1F1F]">
+              <span className="text-[10px] font-mono font-bold text-[#1F1F1F] uppercase tracking-widest">
+                v2.0.0 — Upcoming Features
+              </span>
+            </div>
+            <div className="px-5 py-4 space-y-3">
+              {roadmap.map((item) => (
+                <div key={item.label} className="flex items-start gap-3">
+                  <span
+                    className="shrink-0 text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border border-current mt-0.5"
+                    style={{ color: typeColor[item.type] ?? "#9CA3AF" }}
+                  >
+                    {item.type}
+                  </span>
+                  <p className="text-[#1F1F1F] text-sm font-medium leading-snug">{item.label}</p>
+                </div>
+              ))}
+              <p className="text-[10px] text-[#9CA3AF] font-mono pt-1">
+                Status: IN PLANNING · Priority: HIGH · Assignee: Both of us
+              </p>
+            </div>
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0 }}

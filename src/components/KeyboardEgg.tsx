@@ -27,13 +27,25 @@ export default function KeyboardEgg() {
 
   useEffect(() => {
     console.log(
-      "%c🐞 You opened DevTools. Of course you did.",
-      "color:#FF5A5F;font-size:14px;font-weight:bold;"
+      "%c╔══════════════════════════════════╗\n" +
+      "║   🎂  Birthday Release v1.0.0  🎂  ║\n" +
+      "║                                  ║\n" +
+      "║   You opened DevTools.           ║\n" +
+      "║   Of course you did.             ║\n" +
+      "║                                  ║\n" +
+      "║       🕯  🕯  🕯  🕯  🕯           ║\n" +
+      "║     ░░░░░░░░░░░░░░░░░░░          ║\n" +
+      "║     ░  H A P P Y  B D  ░         ║\n" +
+      "║     ░░░░░░░░░░░░░░░░░░░          ║\n" +
+      "╚══════════════════════════════════╝",
+      "color:#FF5A5F;font-family:monospace;font-size:11px;font-weight:bold;"
     );
     console.log(
-      "%cPsst — there's a cheat code somewhere on this page 🎮",
+      "%cPsst — there\u2019s a cheat code somewhere on this page \uD83C\uDFAE",
       "color:#9CA3AF;font-size:12px;"
     );
+    // Ping the feelings API — check the Network tab 👀
+    fetch("/api/v1/feelings").catch(() => {});
   }, []);
 
   useEffect(() => {

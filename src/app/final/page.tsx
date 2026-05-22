@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
+import SignaturePad from "@/components/SignaturePad";
 import { useTypewriter } from "@/hooks/useTypewriter";
 
 const lines = [
@@ -75,6 +76,7 @@ function TypewriterLines({ onDone }: { onDone: () => void }) {
 export default function FinalPage() {
   const [started, setStarted] = useState(false);
   const [writingDone, setWritingDone] = useState(false);
+  const [hasSigned, setHasSigned] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setStarted(true), 600);
@@ -85,6 +87,7 @@ export default function FinalPage() {
 
   useEffect(() => {
     if (!writingDone) return;
+    sessionStorage.setItem("birthdayParty", "1");
     import("canvas-confetti").then(({ default: confetti }) => {
       confetti({ particleCount: 120, spread: 90, origin: { y: 0.55 }, colors: ["#FFE66D", "#FF5A5F", "#4ECDC4", "#1F1F1F"] });
       setTimeout(() => confetti({ particleCount: 80, spread: 120, origin: { y: 0.5, x: 0.2 }, colors: ["#FFE66D", "#FF5A5F"] }), 400);
@@ -110,7 +113,7 @@ export default function FinalPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white border-2 border-[#1F1F1F] rounded-2xl p-10 shadow-[8px_8px_0px_#1F1F1F]"
+          className="bg-white border-2 border-[#1F1F1F] rounded-2xl p-6 sm:p-10 shadow-[8px_8px_0px_#1F1F1F]"
         >
           <motion.div
             animate={{ y: [0, -6, 0] }}
@@ -169,10 +172,25 @@ export default function FinalPage() {
 
           <AnimatePresence>
             {writingDone && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 }}
+              >
+                <SignaturePad
+                  onSigned={() => setHasSigned(true)}
+                  onCleared={() => setHasSigned(false)}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {writingDone && hasSigned && (
               <motion.button
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: 0.1 }}
                 onClick={fireConfetti}
                 className="mt-4 bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all w-full"
               >

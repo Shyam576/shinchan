@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import BugchanSay from "@/components/BugchanSay";
 
@@ -13,8 +13,14 @@ const truths = [
   "She will outlast every bad day she has ever had.",
 ];
 
+const RUNAWAY_IDX = 4;
+
 export default function TestCasesPage() {
   const [checked, setChecked] = useState<Set<number>>(new Set());
+  const [runawayPos, setRunawayPos] = useState({ x: 0, y: 0 });
+  const [runawayCaught, setRunawayCaught] = useState(false);
+  const [showCaughtMsg, setShowCaughtMsg] = useState(false);
+  const runawayRef = useRef<HTMLButtonElement>(null);
 
   function toggle(i: number) {
     setChecked((prev) => {
@@ -22,6 +28,23 @@ export default function TestCasesPage() {
       next.has(i) ? next.delete(i) : next.add(i);
       return next;
     });
+  }
+
+  function handleMouseMove(e: React.MouseEvent) {
+    if (runawayCaught || checked.has(RUNAWAY_IDX)) return;
+    const btn = runawayRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+    if (dist < 90) {
+      const angle = Math.atan2(cy - e.clientY, cx - e.clientX);
+      setRunawayPos((prev) => ({
+        x: Math.max(-80, Math.min(80, prev.x + Math.cos(angle) * 55 + (Math.random() - 0.5) * 30)),
+        y: Math.max(-18, Math.min(18, prev.y + Math.sin(angle) * 22 + (Math.random() - 0.5) * 14)),
+      }));
+    }
   }
 
   const allChecked = checked.size === truths.length;
@@ -34,12 +57,12 @@ export default function TestCasesPage() {
   }, [allChecked]);
 
   return (
-    <div className="min-h-screen px-5 py-12">
+    <div className="min-h-screen px-5 py-12" onMouseMove={handleMouseMove}>
       <div className="max-w-xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10 flex items-start gap-5"
+          className="mb-10 flex flex-col sm:flex-row items-start gap-4"
         >
           <div className="flex-1">
             <div className="inline-block bg-[#1F1F1F] text-[#FFE66D] rounded-full px-3 py-0.5 text-xs font-mono font-semibold mb-2 tracking-wide">
@@ -60,10 +83,27 @@ export default function TestCasesPage() {
           {truths.map((truth, i) => (
             <motion.button
               key={i}
+              ref={i === RUNAWAY_IDX ? (runawayRef as React.RefObject<HTMLButtonElement>) : undefined}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1 }}
-              onClick={() => toggle(i)}
+              onClick={() => {
+                toggle(i);
+                if (i === RUNAWAY_IDX && !checked.has(i)) {
+                  setRunawayCaught(true);
+                  setRunawayPos({ x: 0, y: 0 });
+                  setShowCaughtMsg(true);
+                  setTimeout(() => setShowCaughtMsg(false), 3500);
+                }
+              }}
+              style={
+                i === RUNAWAY_IDX && !checked.has(RUNAWAY_IDX)
+                  ? {
+                      transform: `translate(${runawayPos.x}px, ${runawayPos.y}px)`,
+                      transition: "transform 0.12s ease",
+                    }
+                  : {}
+              }
               className={[
                 "w-full text-left p-5 border-2 border-[#1F1F1F] rounded-2xl transition-all shadow-[4px_4px_0px_#1F1F1F]",
                 checked.has(i) ? "bg-[#4ECDC4]" : "bg-white hover:bg-[#FFF8E7]",
@@ -83,6 +123,21 @@ export default function TestCasesPage() {
             </motion.button>
           ))}
         </div>
+
+        <AnimatePresence>
+          {showCaughtMsg && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="mt-5 bg-[#4ECDC4] border-2 border-[#1F1F1F] rounded-2xl px-5 py-3 shadow-[4px_4px_0px_#1F1F1F] text-center"
+            >
+              <p className="text-[#1F1F1F] text-sm font-semibold font-mono">
+                Excellent dexterity. Edge case handled. ✓
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {allChecked && (
           <motion.div

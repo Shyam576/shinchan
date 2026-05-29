@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
@@ -14,11 +14,13 @@ const reactions = [
 export default function IntroPage() {
   const [presses, setPresses] = useState(0);
   const [show, setShow] = useState(false);
+  const pressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function press() {
     setPresses((p) => p + 1);
     setShow(true);
-    setTimeout(() => setShow(false), 2000);
+    if (pressTimer.current) clearTimeout(pressTimer.current);
+    pressTimer.current = setTimeout(() => setShow(false), 2000);
   }
 
   const reaction = reactions[Math.min(presses - 1, reactions.length - 1)] ?? "";

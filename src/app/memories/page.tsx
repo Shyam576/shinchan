@@ -102,7 +102,7 @@ export default function MemoriesPage() {
                     className="text-[10px] font-mono font-bold opacity-60"
                     style={{ color: card.color === "#1F1F1F" ? "#FFE66D" : "#1F1F1F" }}
                   >
-                    {card.logId}
+                    {`EXHIBIT-0${card.id}`}
                   </span>
                   <p
                     className="text-lg"

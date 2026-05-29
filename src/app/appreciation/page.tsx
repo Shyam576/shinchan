@@ -92,7 +92,7 @@ export default function AppreciationPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white border-2 border-[#1F1F1F] rounded-2xl p-10 shadow-[8px_8px_0px_#1F1F1F]"
+          className="bg-white border-2 border-[#1F1F1F] rounded-2xl p-6 sm:p-10 shadow-[8px_8px_0px_#1F1F1F]"
         >
           <motion.div
             animate={{ y: [0, -6, 0] }}

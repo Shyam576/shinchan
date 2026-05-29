@@ -30,21 +30,27 @@ export default function TestCasesPage() {
     });
   }
 
-  function handleMouseMove(e: React.MouseEvent) {
+  function handlePointerProximity(clientX: number, clientY: number) {
     if (runawayCaught || checked.has(RUNAWAY_IDX)) return;
     const btn = runawayRef.current;
     if (!btn) return;
     const rect = btn.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
-    const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+    const dist = Math.hypot(clientX - cx, clientY - cy);
     if (dist < 90) {
-      const angle = Math.atan2(cy - e.clientY, cx - e.clientX);
+      const angle = Math.atan2(cy - clientY, cx - clientX);
       setRunawayPos((prev) => ({
         x: Math.max(-80, Math.min(80, prev.x + Math.cos(angle) * 55 + (Math.random() - 0.5) * 30)),
         y: Math.max(-18, Math.min(18, prev.y + Math.sin(angle) * 22 + (Math.random() - 0.5) * 14)),
       }));
     }
+  }
+
+  function handleMouseMove(e: React.MouseEvent) { handlePointerProximity(e.clientX, e.clientY); }
+  function handleTouchMove(e: React.TouchEvent) {
+    const t = e.touches[0];
+    if (t) handlePointerProximity(t.clientX, t.clientY);
   }
 
   const allChecked = checked.size === truths.length;
@@ -57,7 +63,7 @@ export default function TestCasesPage() {
   }, [allChecked]);
 
   return (
-    <div className="min-h-screen px-5 py-12" onMouseMove={handleMouseMove}>
+    <div className="min-h-screen px-5 py-12" onMouseMove={handleMouseMove} onTouchMove={handleTouchMove}>
       <div className="max-w-xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -10 }}

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import BugchanSay from "@/components/BugchanSay";
@@ -74,6 +74,7 @@ const bugs = [
 export default function RoastModePage() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1);
+  const touchStartX = useRef<number | null>(null);
 
   function next() {
     setDirection(1);
@@ -83,6 +84,18 @@ export default function RoastModePage() {
   function prev() {
     setDirection(-1);
     setCurrent((c) => (c - 1 + bugs.length) % bugs.length);
+  }
+
+  function handleTouchStart(e: React.TouchEvent) {
+    touchStartX.current = e.touches[0]?.clientX ?? null;
+  }
+
+  function handleTouchEnd(e: React.TouchEvent) {
+    if (touchStartX.current === null) return;
+    const delta = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+    touchStartX.current = null;
+    if (delta < -40) next();
+    else if (delta > 40) prev();
   }
 
   const bug = bugs[current];
@@ -112,7 +125,11 @@ export default function RoastModePage() {
           <BugchanSay text="These are features. I confirmed it." size={72} />
         </motion.div>
 
-        <div className="relative min-h-[220px]">
+        <div
+          className="relative min-h-[220px]"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={current}

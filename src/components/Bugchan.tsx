@@ -3,7 +3,7 @@ import { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 
 // Mascot — anime chibi-style character for Sonam Deki Tshering (Tiger).
-export default function Bugchan({ size = 160 }: { size?: number }) {
+export default function Bugchan({ size = 160, dancing = false, winking = false }: { size?: number; dancing?: boolean; winking?: boolean }) {
   const h = Math.round(size * 1.35);
   const partyHat = useSyncExternalStore(
     () => () => {},
@@ -12,6 +12,26 @@ export default function Bugchan({ size = 160 }: { size?: number }) {
   );
 
   return (
+    <motion.div
+      animate={dancing ? {
+        rotate: [-12, 12, -12, 12, -12],
+        y: [0, -14, 2, -14, 0],
+        scaleX: [1, 0.9, 1.1, 0.9, 1],
+        scaleY: [1, 1.08, 0.94, 1.08, 1],
+      } : {
+        rotate: [-1.5, 1.5, -1.5],
+      }}
+      transition={dancing ? {
+        duration: 0.52,
+        repeat: Infinity,
+        ease: "easeInOut",
+      } : {
+        duration: 4.5,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+      style={{ display: "inline-block", transformOrigin: "bottom center" }}
+    >
     <svg
       width={size}
       height={h}
@@ -85,12 +105,19 @@ export default function Bugchan({ size = 160 }: { size?: number }) {
       <circle cx="68" cy="77" r="2" fill="white" opacity="0.7" />
       <circle cx="102" cy="77" r="2" fill="white" opacity="0.7" />
 
-      {/* ── Eyelids — blink animation ── */}
+      {/* ── Eyelids — blink / wink animation ── */}
       <motion.ellipse
+        key={winking ? "wink" : "blink-left"}
         cx="63" cy="70" rx={15} ry={0}
         fill="#FFCBA4"
-        animate={{ ry: [0, 16, 0] }}
-        transition={{ duration: 0.18, ease: "easeInOut", repeat: Infinity, repeatDelay: 4.5 }}
+        animate={winking
+          ? { ry: [0, 16, 16, 16, 16, 0] }
+          : { ry: [0, 16, 0] }
+        }
+        transition={winking
+          ? { duration: 1.4, ease: "easeInOut", times: [0, 0.12, 0.35, 0.65, 0.88, 1] }
+          : { duration: 0.18, ease: "easeInOut", repeat: Infinity, repeatDelay: 4.5 }
+        }
       />
       <motion.ellipse
         cx="97" cy="70" rx={15} ry={0}
@@ -166,5 +193,6 @@ export default function Bugchan({ size = 160 }: { size?: number }) {
         </g>
       )}
     </svg>
+    </motion.div>
   );
 }

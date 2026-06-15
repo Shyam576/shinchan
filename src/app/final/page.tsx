@@ -77,6 +77,7 @@ export default function FinalPage() {
   const [started, setStarted] = useState(false);
   const [writingDone, setWritingDone] = useState(false);
   const [hasSigned, setHasSigned] = useState(false);
+  const [winking, setWinking] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setStarted(true), 600);
@@ -93,6 +94,10 @@ export default function FinalPage() {
       setTimeout(() => confetti({ particleCount: 80, spread: 120, origin: { y: 0.5, x: 0.2 }, colors: ["#FFE66D", "#FF5A5F"] }), 400);
       setTimeout(() => confetti({ particleCount: 80, spread: 120, origin: { y: 0.5, x: 0.8 }, colors: ["#4ECDC4", "#1F1F1F"] }), 700);
     });
+    setTimeout(() => {
+      setWinking(true);
+      setTimeout(() => setWinking(false), 1600);
+    }, 900);
   }, [writingDone]);
 
   function fireConfetti() {
@@ -120,7 +125,7 @@ export default function FinalPage() {
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             className="flex justify-center mb-6"
           >
-            <Bugchan size={100} />
+            <Bugchan size={100} winking={winking} />
           </motion.div>
 
           <div className="inline-block bg-[#FFE66D] border-2 border-[#1F1F1F] rounded-full px-3 py-0.5 text-xs font-semibold mb-5 uppercase tracking-wide">
@@ -187,15 +192,21 @@ export default function FinalPage() {
 
           <AnimatePresence>
             {writingDone && hasSigned && (
-              <motion.button
+              <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                onClick={fireConfetti}
-                className="mt-4 bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all w-full"
               >
-                Deploy Birthday Wish 🚀
-              </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.06, y: -4 }}
+                  whileTap={{ scale: 0.92, y: 0 }}
+                  transition={{ type: "spring", stiffness: 440, damping: 16 }}
+                  onClick={fireConfetti}
+                  className="mt-4 bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 font-semibold shadow-[4px_4px_0px_#1F1F1F] w-full"
+                >
+                  Deploy Birthday Wish 🚀
+                </motion.button>
+              </motion.div>
             )}
           </AnimatePresence>
         </motion.div>

@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
 
+const DANCE_THRESHOLD = 5;
+
 // ── Update these to her actual birthday ──
 const BIRTHDAY_MONTH = 7; // July
 const BIRTHDAY_DAY   = 15;
@@ -72,18 +74,18 @@ export default function HomePage() {
         <motion.button
           key={shakeKey}
           onClick={handleTap}
-          animate={shakeKey > 0 ? { rotate: [-4, 4, -3, 3, 0], scale: [1, 1.08, 1] } : {}}
+          animate={count >= DANCE_THRESHOLD ? {} : shakeKey > 0 ? { rotate: [-4, 4, -3, 3, 0], scale: [1, 1.08, 1] } : {}}
           transition={{ duration: 0.35 }}
-          whileHover={{ scale: 1.05 }}
+          whileHover={count >= DANCE_THRESHOLD ? {} : { scale: 1.05 }}
           whileTap={{ scale: 0.93 }}
           className="cursor-pointer focus:outline-none select-none"
           aria-label="Tap the mascot"
         >
           <motion.div
-            animate={{ y: [0, -8, 0] }}
+            animate={count >= DANCE_THRESHOLD ? {} : { y: [0, -8, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
-            <Bugchan size={140} />
+            <Bugchan size={140} dancing={count >= DANCE_THRESHOLD} />
           </motion.div>
         </motion.button>
       </motion.div>
@@ -124,12 +126,19 @@ export default function HomePage() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
       >
-        <Link
-          href="/intro"
-          className="inline-block bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 text-lg font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+        <motion.div
+          whileHover={{ scale: 1.08, y: -4 }}
+          whileTap={{ scale: 0.92, y: 0 }}
+          transition={{ type: "spring", stiffness: 420, damping: 16 }}
+          style={{ display: "inline-block" }}
         >
-          Enter →
-        </Link>
+          <Link
+            href="/intro"
+            className="inline-block bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 text-lg font-semibold shadow-[4px_4px_0px_#1F1F1F]"
+          >
+            Enter →
+          </Link>
+        </motion.div>
       </motion.div>
 
       <motion.div

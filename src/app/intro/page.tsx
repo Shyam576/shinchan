@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
+import BouncyLink from "@/components/BouncyLink";
 
 const reactions = [
   "I knew you would. Classic.",
@@ -112,18 +113,18 @@ export default function IntroPage() {
           </div>
 
           <div className="mt-6 flex gap-3 flex-wrap">
-            <Link
+            <BouncyLink
               href="/bug-hunt"
-              className="bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+              className="inline-block bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold shadow-[4px_4px_0px_#1F1F1F]"
             >
               Observed Behaviors →
-            </Link>
-            <Link
+            </BouncyLink>
+            <BouncyLink
               href="/final"
-              className="border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold hover:bg-[#FFE66D] transition-all"
+              className="inline-block border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold bg-white"
             >
               Skip to Release
-            </Link>
+            </BouncyLink>
           </div>
         </motion.div>
       </div>

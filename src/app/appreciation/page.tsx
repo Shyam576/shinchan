@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Bugchan from "@/components/Bugchan";
+import BouncyLink from "@/components/BouncyLink";
 import { useTypewriter } from "@/hooks/useTypewriter";
 
 const lines = [
@@ -122,12 +123,12 @@ export default function AppreciationPage() {
               transition={{ delay: 0.5 }}
               className="mt-8"
             >
-              <Link
+              <BouncyLink
                 href="/final"
-                className="inline-block bg-[#1F1F1F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 font-semibold shadow-[4px_4px_0px_#FFE66D] hover:shadow-[2px_2px_0px_#FFE66D] hover:translate-x-[2px] hover:translate-y-[2px] transition-all w-full text-center"
+                className="inline-block bg-[#1F1F1F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 font-semibold shadow-[4px_4px_0px_#FFE66D] w-full text-center"
               >
                 Production Release →
-              </Link>
+              </BouncyLink>
             </motion.div>
           )}
         </motion.div>

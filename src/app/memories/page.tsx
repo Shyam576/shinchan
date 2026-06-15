@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import BugchanSay from "@/components/BugchanSay";
+import BouncyLink from "@/components/BouncyLink";
 
 const cards = [
   {
@@ -146,12 +146,12 @@ export default function MemoriesPage() {
             transition={{ delay: 0.3 }}
             className="mt-10 text-center"
           >
-            <Link
+            <BouncyLink
               href="/appreciation"
-              className="inline-block bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold shadow-[4px_4px_0px_#1F1F1F] hover:shadow-[2px_2px_0px_#1F1F1F] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+              className="inline-block bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold shadow-[4px_4px_0px_#1F1F1F]"
             >
               Appreciation →
-            </Link>
+            </BouncyLink>
           </motion.div>
         )}
       </div>

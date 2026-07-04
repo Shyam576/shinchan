@@ -124,10 +124,10 @@ export default function AppreciationPage() {
               className="mt-8"
             >
               <BouncyLink
-                href="/final"
+                href="/qa-stats"
                 className="inline-block bg-[#1F1F1F] text-white border-2 border-[#1F1F1F] rounded-full px-8 py-3 font-semibold shadow-[4px_4px_0px_#FFE66D] w-full text-center"
               >
-                Production Release →
+                QA Dashboard →
               </BouncyLink>
             </motion.div>
           )}

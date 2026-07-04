@@ -112,7 +112,7 @@ export default function TestCasesPage() {
               }
               className={[
                 "w-full text-left p-5 border-2 border-[#1F1F1F] rounded-2xl transition-all shadow-[4px_4px_0px_#1F1F1F]",
-                checked.has(i) ? "bg-[#4ECDC4]" : "bg-white hover:bg-[#FFF8E7]",
+                checked.has(i) ? "bg-[#4ECDC4]" : "bg-white hover:bg-[#FEF6E7]",
               ].join(" ")}
             >
               <div className="flex items-start gap-4">

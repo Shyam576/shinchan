@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${fredoka.variable} ${nunito.variable} h-full`}>
-      <body className="min-h-full flex flex-col bg-[#FFF8E7] text-[#1F1F1F]">
+      <body className="min-h-full flex flex-col bg-[#FEF6E7] text-[#1F1F1F]">
         <BouquetIntro />
         <Nav />
         <main className="flex-1">{children}</main>

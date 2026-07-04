@@ -105,7 +105,7 @@ export default function SignaturePad({ onSigned, onCleared }: Props) {
         onTouchMove={draw}
         onTouchEnd={stopDraw}
         className="w-full border-2 border-dashed border-[#9CA3AF] rounded-xl cursor-crosshair select-none touch-none block"
-        style={{ background: "#FFF8E7" }}
+        style={{ background: "#FEF6E7" }}
       />
       <p className="text-[10px] text-[#9CA3AF] text-center mt-1.5">
         Sign to authorize the deployment

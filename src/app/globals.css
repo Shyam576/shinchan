@@ -4,7 +4,7 @@
   --color-yellow: #FFD34D;
   --color-red:    #FF5A5F;
   --color-teal:   #4DCDB6;
-  --color-cream:  #FFF8E7;
+  --color-cream:  #FEF6E7;
   --color-blush:  #FFB6A6;
   --color-dark:   #222222;
   --color-muted:  #9CA3AF;
@@ -13,7 +13,7 @@
 }
 
 :root {
-  --background: #FFF8E7;
+  --background: #FEF6E7;
   --foreground: #222222;
 }
 

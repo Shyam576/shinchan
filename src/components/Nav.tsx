@@ -32,7 +32,7 @@ export default function Nav() {
   }
 
   return (
-    <nav className="bg-[#FFF8E7]/90 backdrop-blur-sm border-b-2 border-[#1F1F1F] sticky top-0 z-50">
+    <nav className="bg-[#FEF6E7]/90 backdrop-blur-sm border-b-2 border-[#1F1F1F] sticky top-0 z-50">
       <div className="max-w-5xl mx-auto px-4 py-2.5 flex items-center gap-2">
         {/* Logo + version */}
         <button

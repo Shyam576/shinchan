@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-yellow: #FFE66D;
+  --color-yellow: #FFD34D;
   --color-red:    #FF5A5F;
-  --color-teal:   #4ECDC4;
+  --color-teal:   #4DCDB6;
   --color-cream:  #FFF8E7;
-  --color-dark:   #1F1F1F;
+  --color-blush:  #FFB6A6;
+  --color-dark:   #222222;
   --color-muted:  #9CA3AF;
   --font-heading: var(--font-fredoka);
   --font-sans:    var(--font-nunito);
@@ -13,14 +14,14 @@
 
 :root {
   --background: #FFF8E7;
-  --foreground: #1F1F1F;
+  --foreground: #222222;
 }
 
 body {
   background-color: var(--background);
-  /* warm dot grid */
-  background-image: radial-gradient(circle, #d8ccae 1px, transparent 1px);
-  background-size: 24px 24px;
+  /* soft warm dot grid, kept low-opacity so it doesn't compete with the content */
+  background-image: radial-gradient(circle, rgba(216, 204, 174, 0.35) 1px, transparent 1px);
+  background-size: 28px 28px;
   color: var(--foreground);
   font-family: var(--font-nunito), ui-sans-serif, sans-serif;
   scroll-behavior: smooth;

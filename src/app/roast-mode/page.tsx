@@ -199,10 +199,10 @@ export default function RoastModePage() {
             className="mt-8 text-center"
           >
             <BouncyLink
-              href="/memories"
+              href="/appreciation"
               className="inline-block bg-[#FF5A5F] text-white border-2 border-[#1F1F1F] rounded-full px-6 py-2.5 text-sm font-semibold shadow-[4px_4px_0px_#1F1F1F]"
             >
-              Evidence Logs →
+              Appreciation →
             </BouncyLink>
           </motion.div>
         )}

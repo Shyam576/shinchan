@@ -8,7 +8,6 @@ const links = [
   { href: "/bug-hunt",     label: "Observed"     },
   { href: "/test-cases",   label: "Test Cases"   },
   { href: "/roast-mode",   label: "Feature Log"  },
-  { href: "/memories",     label: "Evidence"     },
   { href: "/appreciation", label: "Appreciation" },
   { href: "/qa-stats",     label: "Dashboard"    },
   { href: "/final",        label: "Release"      },

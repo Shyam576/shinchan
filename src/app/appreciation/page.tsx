@@ -136,10 +136,10 @@ export default function AppreciationPage() {
           className="mt-6 text-center"
         >
           <Link
-            href="/memories"
+            href="/roast-mode"
             className="text-sm text-[#9CA3AF] hover:text-[#1F1F1F] transition-colors font-medium"
           >
-            ← Evidence Logs
+            ← Feature Log
           </Link>
         </motion.div>
       </div>

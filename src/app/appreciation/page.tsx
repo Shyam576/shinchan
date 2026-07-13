@@ -35,7 +35,7 @@ function TypewriterLines({ onDone }: { onDone: () => void }) {
   const [shown, setShown] = useState<string[]>([]);
   const { displayed, done } = useTypewriter(
     lineIdx < lines.length ? lines[lineIdx] : "",
-    28
+    28,
   );
 
   useEffect(() => {
@@ -55,11 +55,7 @@ function TypewriterLines({ onDone }: { onDone: () => void }) {
   return (
     <div className="space-y-1 text-[#1F1F1F] text-base leading-relaxed font-medium min-h-[280px]">
       {shown.map((l, i) =>
-        l === "" ? (
-          <div key={i} className="h-3" />
-        ) : (
-          <p key={i}>{l}</p>
-        )
+        l === "" ? <div key={i} className="h-3" /> : <p key={i}>{l}</p>,
       )}
       {lineIdx < lines.length && lines[lineIdx] !== "" && (
         <p>

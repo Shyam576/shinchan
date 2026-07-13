@@ -5,7 +5,7 @@ import Bugchan from "@/components/Bugchan";
 import { useTypewriter } from "@/hooks/useTypewriter";
 
 const message =
-  "Okay. You found it. That means you were curious enough to look, which is very you.\n\nI am not good at saying things directly. So I made a website instead.\n\nYou probably already know everything I would say. But I wanted you to have somewhere that says it anyway.\n\nYou are one of those people who makes a place better just by being in it. Not loudly. Just — the room is different when you are there.\n\nThat is rare. And I am glad I got to be in the same room.\n\nHappy Birthday. 🎂";
+  "Okay. You found it. That means you were curious enough to look, which is very you.\n\nI am not good at saying things directly. So I made a website instead.\n\nYou probably already know everything I would say. But I wanted you to have somewhere that says it anyway.\n\nYou are one of those people who makes a place better just by being in it. Not loudly. The room is just different when you are there.\n\nThat is rare. And I am glad I got to be in the same room.\n\nHappy Birthday. 🎂";
 
 const roadmap = [
   { type: "Feature Request", label: "More of these moments" },

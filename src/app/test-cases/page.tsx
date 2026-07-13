@@ -7,7 +7,7 @@ import BouncyLink from "@/components/BouncyLink";
 const truths = [
   "She is annoying, but only in the way people secretly miss.",
   "She finds the bug other people swore did not exist.",
-  "She has been here longer than the system — and the system is better for it.",
+  "She has been here longer than the system, and the system is better for it.",
   "She makes things feel lighter once you are in her circle.",
   "She is both smart and fun. That combination is rarer than it sounds.",
   "She will outlast every bad day she has ever had.",

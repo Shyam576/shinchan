@@ -72,11 +72,11 @@ export default function IntroPage() {
               Making things work that had no business working.
             </p>
             <p>
-              You are older by three years — but somehow you carry the most playful energy
+              You are older by three years, but somehow you carry the most playful energy
               in any room you walk into.
             </p>
             <p className="text-[#FF5A5F] font-semibold">
-              Smart enough to find every bug. Fun enough to make even boring sprints feel lighter.
+              Smart enough to find every bug. Fun enough to make even the most boring day feel lighter for whoever is around you.
             </p>
             <p>
               This is a small corner of the internet made just for you. No test cases, no tickets.

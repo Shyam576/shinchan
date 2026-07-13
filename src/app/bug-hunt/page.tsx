@@ -19,8 +19,8 @@ const things = [
   { id: 2, icon: icons[1], reveal: "She laughs at her own jokes first. And it makes everyone else laugh harder." },
   { id: 3, icon: icons[2], reveal: "She will find the bug. Even if evreyone swore there was no bug. Especially then." },
   { id: 4, icon: icons[3], reveal: "She remembers things no one else bothered to remember." },
-  { id: 5, icon: icons[4], reveal: "She is three years older. Still brings the most chaotic energy to any sprint." },
-  { id: 6, icon: icons[5], reveal: "She is the reason the team does not ship broken things. Whether they know it or not." },
+  { id: 5, icon: icons[4], reveal: "She is three years older. Still brings the most chaotic energy to everything she touches." },
+  { id: 6, icon: icons[5], reveal: "She is the reason her team does not ship broken things. Whether they know it or not." },
   { id: 7, icon: icons[0], reveal: "She pretends not to care. She cares more than anyone in the room." },
   { id: 8, icon: icons[1], reveal: "Getting comfortable around her means you passed a real test. Not everyone does." },
 ];

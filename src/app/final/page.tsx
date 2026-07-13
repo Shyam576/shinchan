@@ -7,9 +7,9 @@ import SignaturePad from "@/components/SignaturePad";
 import { useTypewriter } from "@/hooks/useTypewriter";
 
 const lines = [
-  "I made this because you remind me of that rare kind of person —",
-  "intelligent, funny, slightly chaotic,",
-  "and somehow still childlike in the best way.",
+  "I made this because you are three years older and somehow still the most chaotic person anyone knows.",
+  "That should not work.",
+  "It works anyway.",
   "",
   "You make things feel lighter once you are comfortable around someone.",
   "That is not a small thing.",
@@ -17,7 +17,7 @@ const lines = [
   "Complaint reviewed.",
   "Verdict: she is annoying, but in a way people secretly miss.",
   "",
-  "So today — no bugs, no test cases, no tickets.",
+  "So today, no bugs, no test cases, no tickets.",
   "Just a small birthday world, made for you.",
   "",
   "Have a good one. You have earned it. 🎂",

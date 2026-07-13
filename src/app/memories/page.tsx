@@ -15,25 +15,25 @@ const cards = [
     id: 2,
     front: "That Quiet Fix",
     color: "#4ECDC4",
-    back: "She fixed something that had been broken for months. Did not announce it. Just closed the ticket.",
+    back: "She fixed something that had been broken for months. Never made it anyone's business. Just fixed it and moved on.",
   },
   {
     id: 3,
     front: "The Energy Shift",
     color: "#FF5A5F",
-    back: "Some days the whole team feels heavy. Then she says something. The room changes. She does not even notice she did it.",
+    back: "Some days a whole room can feel heavy. Then she says something, and it just does not anymore. She never even notices she did it.",
   },
   {
     id: 4,
     front: "The 4:58 PM Bug",
     color: "#FFE66D",
-    back: "Friday. Almost weekend. Production. She found it, fixed it, shipped it, and acted like it was normal. It was not normal.",
+    back: "The kind of story people tell about her for years: something broke right before the weekend, and she fixed it like it was nothing.",
   },
   {
     id: 5,
     front: "When She’s Comfortable",
     color: "#4ECDC4",
-    back: "She is guarded at first. Then one day she is just — herself. That version is someone worth knowing.",
+    back: "She is guarded at first. Then one day she is just herself. That version is someone worth knowing.",
   },
   // ── This last card is yours. Replace the back with something real you remember. ──
   {

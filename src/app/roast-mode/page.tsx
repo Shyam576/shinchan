@@ -27,7 +27,7 @@ const bugs = [
     sevColor: "#36B37E",
     title: "Compliment Gate Threshold Too High",
     status: "WONTFIX",
-    note: "She will not say 'good job' easily. Which is exactly why, when she does — keep it forever.",
+    note: "She will not say 'good job' easily. Which is exactly why you keep it forever when she does.",
   },
   {
     id: "QA-004",

@@ -12,7 +12,7 @@ const lines = [
   "Just things I noticed.",
   "",
   "You make ordinary days feel lighter.",
-  "Not by doing anything special —",
+  "Not by doing anything special,",
   "just by being the version of yourself",
   "you are when you are comfortable.",
   "",
